@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Productivity Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #7F5AF0;
+      --primary-light: #A78BFA;
+      --secondary: #2CB67D;
+      --accent: #FF7E6B;
+      --dark: #16161A;
+      --darker: #0D0D10;
+      --light: #FFFFFE;
+      --gray: #94A1B2;
+      --light-gray: #EFF0F3;
+      --header-bg: linear-gradient(135deg, #7F5AF0 0%, #2CB67D 100%);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.2);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--light-gray);
+      color: #333; /* Darker text for better readability */
+      line-height: 1.7; /* Increased line height for readability */
+      min-height: 100vh;
+    }
+
+    /* Header Styles */
+    header {
+      background: var(--header-bg);
+      color: var(--light);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .logo i {
+      font-size: 2rem;
+    }
+
+    /* About Content Styles */
+    .about-container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .about-section {
+      background: var(--light);
+      padding: 3rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 3rem;
+    }
+
+    .about-section h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 2.2rem;
+    }
+
+    .about-section h3 {
+      color: var(--secondary);
+      margin: 2rem 0 1rem;
+      font-size: 1.5rem;
+      border-bottom: 2px solid var(--light-gray);
+      padding-bottom: 0.5rem;
+    }
+
+    .about-section p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      color: #444; /* Slightly darker than body text for paragraphs */
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .benefit-card {
+      background: var(--light);
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border-top: 4px solid var(--primary);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .benefit-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .benefit-card h4 {
+      color: var(--dark);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .benefit-card p {
+      color: #555;
+    }
+
+    /* Why Productivity Section */
+    .why-productivity {
+      background: var(--darker);
+      color: var(--light);
+      padding: 3rem 2rem;
+      border-radius: 1rem;
+    }
+
+    .why-productivity h3 {
+      color: var(--primary-light);
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .why-productivity p {
+      color: #eee;
+    }
+
+    .importance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .importance-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    .importance-item h4 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.2rem;
+    }
+
+    .importance-item i {
+      color: var(--primary-light);
+    }
+
+    /* Footer Styles */
+    footer {
+      background: var(--darker);
+      color: var(--light);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links a {
+      color: var(--light);
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--primary-light);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    /* Back Button */
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .back-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .about-section {
+        padding: 2rem;
+      }
+      
+      .benefit-card {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1.5rem;
+      }
+      
+      .about-section {
+        padding: 1.5rem;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+      }
+      
+      .logo i {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-check-circle"></i>
+        <span>Productivity Pro</span>
+      </div>
+      <h1>About Our Application</h1>
+    </div>
+  </header>
+
+  
+
+  <div class="about-container">
+    <section class="about-section">
+      <h2>About Productivity Pro</h2>
+      <p>Productivity Pro is your ultimate task management solution designed to help you organize your life, boost your efficiency, and achieve your goals. Our intuitive interface and powerful features make it easy to stay on top of your responsibilities while reducing stress and overwhelm.</p>
+      
+      <h3>Why Choose Productivity Pro?</h3>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <i class="fas fa-bolt"></i>
+          <h4>Simple & Intuitive</h4>
+          <p>Our clean design and straightforward workflow let you focus on what matters most - getting things done without unnecessary complexity.</p>
+        </div>
+        <div class="benefit-card">
+          <i class="fas fa-layer-group"></i>
+          <h4>Priority Management</h4>
+          <p>Easily categorize tasks by priority (low, medium, high) to ensure you're always working on what's most important first.</p>
+        </div>
+        <div class="benefit-card">
+          <i class="fas fa-tags"></i>
+          <h4>Smart Tagging</h4>
+          <p>Organize tasks with custom tags for better categorization and quick filtering across different projects or contexts.</p>
+        </div>
+        <div class="benefit-card">
+                    <i class="fas fa-cloud"></i>
+          <h4>Cloud Sync</h4>
+          <p>Access your tasks from anywhere with our secure cloud synchronization across all your devices in real-time.</p>
+        </div>
+        <div class="benefit-card">
+          <i class="fas fa-chart-line"></i>
+          <h4>Progress Tracking</h4>
+          <p>Visualize your productivity with insightful statistics and completion metrics to stay motivated.</p>
+        </div>
+        <div class="benefit-card">
+          <i class="fas fa-bell"></i>
+          <h4>Smart Reminders</h4>
+          <p>Never miss important deadlines with customizable notifications and due date alerts.</p>
+        </div>
+      </div>
+
+      <h3>Our Mission</h3>
+      <p>At Productivity Pro, we believe that effective task management should be accessible to everyone. Our mission is to help individuals and teams reduce stress, accomplish more, and find satisfaction in their daily achievements through thoughtful productivity tools.</p>
+      
+      <h3>Key Features</h3>
+      <ul style="margin-left: 2rem; margin-bottom: 2rem;">
+        <li>Intuitive task creation and management</li>
+        <li>Priority-based task organization</li>
+        <li>Customizable tags for flexible categorization</li>
+        <li>Due date tracking with visual indicators</li>
+        <li>Progress statistics and completion tracking</li>
+        <li>Cross-platform availability</li>
+        <li>Secure cloud synchronization</li>
+      </ul>
+    </section>
+
+    <section class="about-section why-productivity">
+      <h3>The Importance of Productivity</h3>
+      <p>In today's fast-paced world, effective task management is more crucial than ever. Productivity isn't about doing more - it's about doing what matters most efficiently. Here's why developing good productivity habits can transform your life:</p>
+      
+      <div class="importance-grid">
+        <div class="importance-item">
+          <h4><i class="fas fa-brain"></i> Mental Clarity</h4>
+          <p>Clearing your mind of mental clutter reduces stress and allows for better focus on important tasks.</p>
+        </div>
+        <div class="importance-item">
+          <h4><i class="fas fa-clock"></i> Time Management</h4>
+          <p>Prioritizing effectively helps you make the most of your limited time each day.</p>
+        </div>
+        <div class="importance-item">
+          <h4><i class="fas fa-bullseye"></i> Goal Achievement</h4>
+          <p>Breaking down large goals into manageable tasks makes success more attainable.</p>
+        </div>
+        <div class="importance-item">
+          <h4><i class="fas fa-balance-scale"></i> Work-Life Balance</h4>
+          <p>Proper task management creates space for both professional and personal priorities.</p>
+        </div>
+        <div class="importance-item">
+          <h4><i class="fas fa-chart-pie"></i> Better Decisions</h4>
+          <p>Clear priorities lead to more informed choices about how to spend your time and energy.</p>
+        </div>
+        <div class="importance-item">
+          <h4><i class="fas fa-smile"></i> Reduced Stress</h4>
+          <p>Knowing what needs to be done and having a plan eliminates anxiety about forgotten tasks.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <h3>Our Story</h3>
+      <p>Productivity Pro was one of the most needed and useful website that helps in organizing the work and complete under the deadline. one day I missed my deadline for submitting my work and dont want the same to occur again , then I decided to make a intuitive and multitasker to do manager "Productivity Pro " that helps to organize the life.</p>
+      
+      
+      
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Application
+      </a>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-links">
+        
+        <a href="https://www.linkedin.com/in/shristi-singh-91454a251/" aria-label="linkedin"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/shristigithub03" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+      <p class="copyright">Made by Shristi Singh</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | Productivity Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #7F5AF0;
+      --primary-light: #A78BFA;
+      --secondary: #2CB67D;
+      --accent: #FF7E6B;
+      --dark: #16161A;
+      --darker: #0D0D10;
+      --light: #FFFFFE;
+      --gray: #94A1B2;
+      --light-gray: #EFF0F3;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.2);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--light-gray);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, #7F5AF0 0%, #2CB67D 100%);
+      color: var(--light);
+      padding: 1.5rem 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .logo i {
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    nav a.active {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .settings-container {
+      background: var(--light);
+      border-radius: 1rem;
+      box-shadow: var(--shadow-lg);
+      padding: 2rem;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .settings-header i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .settings-header h1 {
+      font-size: 1.8rem;
+      color: var(--dark);
+    }
+
+    .settings-group {
+      margin-bottom: 2.5rem;
+    }
+
+    .settings-group h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--light-gray);
+    }
+
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--light-gray);
+      border-radius: 0.5rem;
+    }
+
+    .setting-item label {
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    select {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--light-gray);
+      background: white;
+      font-family: 'Poppins', sans-serif;
+      min-width: 150px;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+
+    .btn i {
+      font-size: 1rem;
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: var(--darker);
+      color: var(--light);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .copyright {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    /* Task list styles */
+    .task-list-container {
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .task-list {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+
+    .task-item {
+      background: var(--light-gray);
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .task-title {
+      font-weight: 500;
+    }
+
+    .task-completed {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .task-actions button {
+      padding: 0.25rem 0.5rem;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background: var(--primary);
+      color: white;
+    }
+
+    .delete-btn {
+      background: var(--accent);
+      color: white;
+    }
+
+    .toggle-btn {
+      background: var(--secondary);
+      color: white;
+    }
+
+    /* History section styles */
+    .history-container {
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .history-list {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+
+    .history-item {
+      background: var(--light-gray);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .history-date {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .history-tasks {
+      margin-top: 0.5rem;
+    }
+
+    .history-task {
+      padding: 0.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .history-task:last-child {
+      border-bottom: none;
+    }
+
+    .history-task-title {
+      flex: 1;
+    }
+
+    .history-task-completed {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background: #121212;
+      color: #f5f5f5;
+    }
+
+    body.dark-mode .settings-container {
+      background: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    body.dark-mode .settings-header h1,
+    body.dark-mode .settings-group h2,
+    body.dark-mode .setting-item label {
+      color: #f5f5f5;
+    }
+
+    body.dark-mode .setting-item {
+      background: #2d2d2d;
+    }
+
+    body.dark-mode select {
+      background: #2d2d2d;
+      color: #f5f5f5;
+      border-color: #444;
+    }
+
+    body.dark-mode .task-item {
+      background: #2d2d2d;
+    }
+
+    body.dark-mode .history-item {
+      background: #2d2d2d;
+    }
+
+    body.dark-mode .history-task {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Current tasks display styles */
+    .current-tasks-container {
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .current-tasks-list {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+
+    .current-task-item {
+      background: var(--light-gray);
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .current-task-text {
+      font-weight: 500;
+    }
+
+    .priority-badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .priority-badge.high {
+      background: #FECACA;
+      color: #B91C1C;
+    }
+
+    .priority-badge.medium {
+      background: #FEF08A;
+      color: #B45309;
+    }
+
+    .priority-badge.low {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+
+    .tags-container {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      background: var(--primary-light);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+      }
+
+      .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header, footer {
+        padding: 1.25rem;
+      }
+
+      .settings-container {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <i class="fas fa-check-circle"></i>
+        <span>Productivity Pro</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="setting.html" class="active">Settings</a></li>
+          <li><a href="help.html">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="settings-container">
+      <div class="settings-header">
+        <i class="fas fa-cog"></i>
+        <h1>Application Settings</h1>
+      </div>
+
+      <div class="settings-group">
+        <h2>Appearance</h2>
+        
+        <div class="setting-item">
+          <label for="darkModeToggle">Dark Mode</label>
+          <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="setting-item">
+          <label for="themeColor">Theme Color</label>
+          <select id="themeColor">
+            <option value="purple">Purple</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="settings-group">
+        <h2>Notifications</h2>
+        
+        <div class="setting-item">
+          <label for="notificationsEnabled">Enable Notifications</label>
+          <label class="switch">
+            <input type="checkbox" id="notificationsEnabled" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="setting-item">
+          <label for="reminderFrequency">Reminder Frequency</label>
+          <select id="reminderFrequency">
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="settings-group">
+        <h2>Data Management</h2>
+        
+        <div class="setting-item">
+          <label>Export Tasks</label>
+          <button class="btn" id="exportBtn">
+            <i class="fas fa-file-export"></i> Export
+          </button>
+        </div>
+        
+        <div class="setting-item">
+          <label>Import Tasks</label>
+          <button class="btn" id="importBtn">
+            <i class="fas fa-file-import"></i> Import
+          </button>
+          <input type="file" id="importFile" accept=".json" style="display: none;">
+        </div>
+
+        <div class="setting-item">
+          <label>View Current Tasks</label>
+          <button class="btn" id="showTasksBtn">
+            <i class="fas fa-list"></i> Show Tasks
+          </button>
+        </div>
+
+        <div class="setting-item">
+          <label>Task History</label>
+          <button class="btn" id="viewHistoryBtn">
+            <i class="fas fa-history"></i> View History
+          </button>
+        </div>
+      </div>
+
+      <!-- Add this to your settings-container div, after the Data Management section -->
+<div class="settings-group">
+  <h2>Progress Tracking</h2>
+  
+  <div class="setting-item">
+    <label>View Productivity Stats</label>
+    <button class="btn" id="showStatsBtn">
+      <li><a href="statistics.html">Statistics</a></li>
+
+    </button>
+  </div>
+</div>
+
+<!-- Add this new section after the History section -->
+<div class="stats-container" id="statsContainer" style="display: none;">
+  <h2>Productivity Statistics</h2>
+  
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value" id="totalTasks">0</div>
+      <div class="stat-label">Total Tasks</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-value" id="completedTasks">0</div>
+      <div class="stat-label">Completed</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-value" id="completionRate">0%</div>
+      <div class="stat-label">Completion Rate</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-value" id="avgCompletionTime">0h</div>
+      <div class="stat-label">Avg. Time</div>
+    </div>
+  </div>
+  
+  <div class="chart-container">
+    <canvas id="productivityChart"></canvas>
+  </div>
+  
+  <button class="btn" onclick="hideStats()">
+    <i class="fas fa-times"></i> Close
+  </button>
+</div>
+
+      <!-- Current Tasks Section -->
+      <div class="current-tasks-container" id="currentTasksContainer">
+        <h2>Current Tasks</h2>
+        <div class="current-tasks-list" id="currentTasksList"></div>
+        <button class="btn" onclick="hideCurrentTasks()">
+          <i class="fas fa-times"></i> Close
+        </button>
+      </div>
+
+      <!-- History Section -->
+      <div class="history-container" id="historyContainer">
+        <h2>Task History</h2>
+        <div class="history-list" id="historyList"></div>
+        <button class="btn" onclick="hideHistory()">
+          <i class="fas fa-times"></i> Close History
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p class="copyright">Made by Shristi Singh</p>
+    </div>
+  </footer>
+
+  <script>
+    // API Base URL - Update this if your server runs on a different port
+    const API_BASE_URL = 'http://localhost:3000/tasks';
+
+    // DOM Elements
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const themeColor = document.getElementById('themeColor');
+    const notificationsEnabled = document.getElementById('notificationsEnabled');
+    const reminderFrequency = document.getElementById('reminderFrequency');
+    const exportBtn = document.getElementById('exportBtn');
+    const importBtn = document.getElementById('importBtn');
+    const importFile = document.getElementById('importFile');
+    const showTasksBtn = document.getElementById('showTasksBtn');
+    const viewHistoryBtn = document.getElementById('viewHistoryBtn');
+    const currentTasksContainer = document.getElementById('currentTasksContainer');
+    const currentTasksList = document.getElementById('currentTasksList');
+    const historyContainer = document.getElementById('historyContainer');
+    const historyList = document.getElementById('historyList');
+
+    // Initialize the app when DOM loads
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSettings();
+      setupEventListeners();
+    });
+
+    // Load saved settings
+    function loadSettings() {
+      const settings = JSON.parse(localStorage.getItem('appSettings')) || {
+        darkMode: false,
+        themeColor: 'purple',
+        notifications: true,
+        reminderFrequency: 'daily'
+      };
+
+      darkModeToggle.checked = settings.darkMode;
+      themeColor.value = settings.themeColor;
+      notificationsEnabled.checked = settings.notifications;
+      reminderFrequency.value = settings.reminderFrequency;
+
+      applySettings(settings);
+    }
+
+    // Set up event listeners
+    function setupEventListeners() {
+      darkModeToggle.addEventListener('change', saveSettings);
+      themeColor.addEventListener('change', saveSettings);
+      notificationsEnabled.addEventListener('change', saveSettings);
+      reminderFrequency.addEventListener('change', saveSettings);
+      
+      exportBtn.addEventListener('click', exportTasks);
+      importBtn.addEventListener('click', () => importFile.click());
+      importFile.addEventListener('change', importTasks);
+      showTasksBtn.addEventListener('click', showCurrentTasks);
+      viewHistoryBtn.addEventListener('click', showHistory);
+    }
+
+    // Save settings to localStorage
+    function saveSettings() {
+      const settings = {
+        darkMode: darkModeToggle.checked,
+        themeColor: themeColor.value,
+        notifications: notificationsEnabled.checked,
+        reminderFrequency: reminderFrequency.value
+      };
+
+      localStorage.setItem('appSettings', JSON.stringify(settings));
+      applySettings(settings);
+    }
+
+    // Apply visual settings
+    function applySettings(settings) {
+      // Dark mode
+      if (settings.darkMode) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+
+      // Theme color
+      const root = document.documentElement;
+      switch(settings.themeColor) {
+        case 'blue':
+          root.style.setProperty('--primary', '#4285F4');
+          root.style.setProperty('--primary-light', '#8AB4F8');
+          break;
+        case 'green':
+          root.style.setProperty('--primary', '#34A853');
+          root.style.setProperty('--primary-light', '#81C995');
+          break;
+        case 'red':
+          root.style.setProperty('--primary', '#EA4335');
+          root.style.setProperty('--primary-light', '#F28B82');
+          break;
+        default: // purple
+          root.style.setProperty('--primary', '#7F5AF0');
+          root.style.setProperty('--primary-light', '#A78BFA');
+      }
+    }
+
+    // ======================
+    // TASK MANAGEMENT FUNCTIONS
+    // ======================
+
+    // Load tasks from the server
+    async function loadTasks() {
+      try {
+        const response = await fetch(API_BASE_URL);
+        if (!response.ok) throw new Error('Failed to load tasks');
+        return await response.json();
+      } catch (error) {
+        console.error('Error loading tasks:', error);
+        return [];
+      }
+    }
+
+    // ======================
+    // IMPORT/EXPORT FUNCTIONS
+    // ======================
+
+    // Export tasks to JSON file
+    async function exportTasks() {
+      try {
+        const [tasks, history] = await Promise.all([
+          loadTasks(),
+          JSON.parse(localStorage.getItem('taskHistory')) || []
+        ]);
+        
+        const exportData = {
+          tasks: tasks,
+          history: history,
+          exportedAt: new Date().toISOString(),
+          version: '1.0'
+        };
+        
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `tasks-export-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        alert('Tasks and history exported successfully!');
+      } catch (error) {
+        console.error('Export error:', error);
+        alert('Failed to export tasks. Please try again.');
+      }
+    }
+
+    // Import tasks from JSON file
+    async function importTasks(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      if (!confirm('Importing will replace your current tasks and history. Continue?')) {
+        event.target.value = '';
+        return;
+      }
+      
+      try {
+        const fileContent = await readFileAsText(file);
+        const importData = JSON.parse(fileContent);
+        
+        // Validate import data
+        if (!importData.tasks || !Array.isArray(importData.tasks)) {
+          throw new Error('Invalid file format: tasks array missing');
+        }
+        
+        // Send tasks to server
+        const response = await fetch(API_BASE_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(importData.tasks)
+        });
+        
+        if (!response.ok) throw new Error('Failed to import tasks');
+        
+        // Handle history import
+        if (importData.history && Array.isArray(importData.history)) {
+          // Add a new history entry for the import action
+          const importHistoryItem = {
+            id: Date.now(),
+            date: new Date().toISOString(),
+            action: 'imported tasks',
+            tasks: importData.tasks
+          };
+          
+          const updatedHistory = [importHistoryItem, ...importData.history];
+          localStorage.setItem('taskHistory', JSON.stringify(updatedHistory));
+        } else {
+          // If no history in import, create a new entry
+          const importHistoryItem = {
+            id: Date.now(),
+            date: new Date().toISOString(),
+            action: 'imported tasks',
+            tasks: importData.tasks
+          };
+          
+          localStorage.setItem('taskHistory', JSON.stringify([importHistoryItem]));
+        }
+        
+        // Reset file input
+        event.target.value = '';
+        
+        // Show success message
+        alert('Tasks and history imported successfully!');
+        
+        // Refresh displays
+        showCurrentTasks();
+        showHistory();
+      } catch (error) {
+        console.error('Import error:', error);
+        alert('Error importing tasks: ' + error.message);
+        event.target.value = '';
+      }
+    }
+
+    // Helper function to read file as text
+    function readFileAsText(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = event => resolve(event.target.result);
+        reader.onerror = error => reject(error);
+        reader.readAsText(file);
+      });
+    }
+
+    // ======================
+    // CURRENT TASKS FUNCTIONS
+    // ======================
+
+    // Show current tasks
+    async function showCurrentTasks() {
+      try {
+        historyContainer.style.display = 'none';
+        currentTasksContainer.style.display = 'block';
+        
+        const tasks = await loadTasks();
+        renderCurrentTasks(tasks);
+      } catch (error) {
+        console.error('Error showing tasks:', error);
+        currentTasksList.innerHTML = '<p>Error loading tasks. Please try again.</p>';
+      }
+    }
+
+    // Render current tasks
+    function renderCurrentTasks(tasks) {
+      currentTasksList.innerHTML = '';
+      
+      if (tasks.length === 0) {
+        currentTasksList.innerHTML = '<p>No tasks found.</p>';
+        return;
+      }
+      
+      tasks.forEach(task => {
+        const taskItem = document.createElement('div');
+        taskItem.className = `current-task-item ${task.completed ? 'task-completed' : ''}`;
+        
+        const priorityClass = task.priority ? task.priority.toLowerCase() : 'medium';
+        const tagsHTML = task.tags && task.tags.length > 0 
+          ? `<div class="tags-container">${task.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+          : '';
+        
+        taskItem.innerHTML = `
+          <div class="task-content">
+            <div class="current-task-text">${task.text}</div>
+            <div class="task-meta">
+              <span class="priority-badge ${priorityClass}">${task.priority || 'Medium'}</span>
+              ${tagsHTML}
+            </div>
+          </div>
+        `;
+        
+        currentTasksList.appendChild(taskItem);
+      });
+    }
+
+    // Hide current tasks
+    function hideCurrentTasks() {
+      currentTasksContainer.style.display = 'none';
+    }
+
+    // ======================
+    // HISTORY FUNCTIONS
+    // ======================
+
+    // Show task history
+    async function showHistory() {
+      try {
+        currentTasksContainer.style.display = 'none';
+        historyContainer.style.display = 'block';
+        
+        const [tasks, history] = await Promise.all([
+          loadTasks(),
+          JSON.parse(localStorage.getItem('taskHistory')) || []
+        ]);
+        
+        // Create a complete history by combining current tasks with saved history
+        const completeHistory = [
+          {
+            id: 'current',
+            date: new Date().toISOString(),
+            action: 'current tasks',
+            tasks: tasks
+          },
+          ...history
+        ];
+        
+        renderHistory(completeHistory);
+      } catch (error) {
+        console.error('Error showing history:', error);
+        historyList.innerHTML = '<p>Error loading history. Please try again.</p>';
+      }
+    }
+
+    // Render task history
+    function renderHistory(history) {
+      historyList.innerHTML = '';
+      
+      if (history.length === 0) {
+        historyList.innerHTML = '<p>No history available.</p>';
+        return;
+      }
+      
+      history.forEach(item => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+        
+        const formattedDate = new Date(item.date || Date.now()).toLocaleString();
+        const action = item.action || 'modified';
+        
+        let tasksHTML = '';
+        if (item.tasks && item.tasks.length > 0) {
+          tasksHTML = '<div class="history-tasks">';
+          item.tasks.slice(0, 5).forEach(task => {
+            tasksHTML += `
+              <div class="history-task ${task.completed ? 'history-task-completed' : ''}">
+                <span class="history-task-title">${task.text || 'Untitled task'}</span>
+                <span>${task.completed ? '✓' : ''}</span>
+              </div>
+            `;
+          });
+          
+          if (item.tasks.length > 5) {
+            tasksHTML += `<div class="history-task">+ ${item.tasks.length - 5} more tasks</div>`;
+          }
+          
+          tasksHTML += '</div>';
+        }
+        
+        historyItem.innerHTML = `
+          <div class="history-header">
+            <div>
+              <span class="history-date">${formattedDate}</span>
+              <span> - ${action}</span>
+            </div>
+            ${item.id !== 'current' ? `
+            <div class="history-actions">
+              <button class="btn btn-sm" onclick="restoreFromHistory('${item.id}')">
+                <i class="fas fa-undo"></i> Restore
+              </button>
+            </div>
+            ` : ''}
+          </div>
+          ${tasksHTML}
+        `;
+        
+        historyList.appendChild(historyItem);
+      });
+    }
+
+    // Hide history
+    function hideHistory() {
+      historyContainer.style.display = 'none';
+    }
+
+    // Restore from history
+    async function restoreFromHistory(id) {
+      const history = JSON.parse(localStorage.getItem('taskHistory')) || [];
+      const currentTasks = await loadTasks();
+      
+      // Combine current tasks with history for lookup
+      const completeHistory = [
+        {
+          id: 'current',
+          date: new Date().toISOString(),
+          action: 'current tasks',
+          tasks: currentTasks
+        },
+        ...history
+      ];
+      
+      const snapshot = completeHistory.find(item => item.id === id || item.id?.toString() === id);
+      
+      if (!snapshot) {
+        alert('History item not found');
+        return;
+      }
+      
+      if (!snapshot.tasks || !Array.isArray(snapshot.tasks)) {
+        alert('No valid tasks found in this history item');
+        return;
+      }
+      
+      if (!confirm('Are you sure you want to restore this version of your tasks? This will overwrite your current tasks.')) {
+        return;
+      }
+      
+      try {
+        const response = await fetch(API_BASE_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(snapshot.tasks)
+        });
+        
+        if (!response.ok) throw new Error('Failed to restore tasks');
+        
+        // Create a new history entry for the restore action
+        const newHistoryItem = {
+          id: Date.now(),
+          date: new Date().toISOString(),
+          action: 'restored from history',
+          tasks: snapshot.tasks
+        };
+        
+        const updatedHistory = [newHistoryItem, ...history];
+        localStorage.setItem('taskHistory', JSON.stringify(updatedHistory));
+        
+        alert('Tasks restored successfully!');
+        showHistory(); // Refresh the history view
+        showCurrentTasks(); // Also refresh current tasks view
+      } catch (error) {
+        console.error('Restore error:', error);
+        alert('Failed to restore tasks. Please try again.');
+      }
+    }
+  </script>
+</body>
+</html>

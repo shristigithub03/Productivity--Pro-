@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📊 Productivity Pro - Analytics Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #7F5AF0;
+      --primary-light: #A78BFA;
+      --secondary: #2CB67D;
+      --accent: #FF7E6B;
+      --dark: #16161A;
+      --darker: #0D0D10;
+      --light: #FFFFFE;
+      --gray: #94A1B2;
+      --light-gray: #EFF0F3;
+      --header-bg: linear-gradient(135deg, #7F5AF0 0%, #2CB67D 100%);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.2);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--light-gray);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Styles */
+    header {
+      background: var(--header-bg);
+      color: var(--light);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .logo i {
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    nav a.active {
+      background: rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+    }
+
+    /* Main Content Area */
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2670&auto=format&fit=crop') center/cover no-repeat;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 0;
+    }
+
+    .dashboard-container {
+      width: 100%;
+      max-width: 1200px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .time-period-selector {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .time-period-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      background: var(--light);
+      border: 1px solid var(--light-gray);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .time-period-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .time-period-btn:hover {
+      background: var(--primary-light);
+      color: white;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--light);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border-left: 4px solid var(--primary);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-card.completed {
+      border-left-color: var(--secondary);
+    }
+
+    .stat-card.high-priority {
+      border-left-color: var(--accent);
+    }
+
+    .stat-card.medium-priority {
+      border-left-color: #FFC107;
+    }
+
+    .stat-card.low-priority {
+      border-left-color: #4CAF50;
+    }
+
+    .stat-title {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-change {
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-change.positive {
+      color: var(--secondary);
+    }
+
+    .stat-change.negative {
+      color: var(--accent);
+    }
+
+    .chart-container {
+      background: var(--light);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 400px !important;
+    }
+
+    .task-distribution {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .distribution-card {
+      background: var(--light);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .distribution-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .distribution-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .distribution-value {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--light-gray);
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Footer Styles */
+    footer {
+      background: var(--darker);
+      color: var(--light);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-links a {
+      color: var(--light);
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--primary-light);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      opacity: 0.8;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .time-period-selector {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header, footer {
+        padding: 1.25rem;
+      }
+
+      main {
+        padding: 1.25rem;
+      }
+
+      .stat-card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-check-circle"></i>
+        <span>Productivity Pro</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="statistics.html" class="active"><i class="fas fa-chart-line"></i> Analytics</a></li>
+          <li><a href="about.html" target="_blank"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="setting.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">
+          <i class="fas fa-chart-pie"></i> Productivity Analytics
+        </h1>
+        <div class="time-period-selector">
+          <button class="time-period-btn" onclick="changeTimePeriod('week')">Week</button>
+          <button class="time-period-btn active" onclick="changeTimePeriod('month')">Month</button>
+          <button class="time-period-btn" onclick="changeTimePeriod('quarter')">Quarter</button>
+          <button class="time-period-btn" onclick="changeTimePeriod('year')">Year</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-title"><i class="fas fa-tasks"></i> Total Tasks</div>
+          <div class="stat-value">127</div>
+          <div class="stat-change positive">
+            <i class="fas fa-arrow-up"></i> 12% from last period
+          </div>
+        </div>
+        <div class="stat-card completed">
+          <div class="stat-title"><i class="fas fa-check-circle"></i> Completed</div>
+          <div class="stat-value">89</div>
+          <div class="stat-change positive">
+            <i class="fas fa-arrow-up"></i> 8% from last period
+          </div>
+        </div>
+        <div class="stat-card high-priority">
+          <div class="stat-title"><i class="fas fa-exclamation-circle"></i> High Priority</div>
+          <div class="stat-value">23</div>
+          <div class="stat-change negative">
+            <i class="fas fa-arrow-down"></i> 5% from last period
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title"><i class="fas fa-stopwatch"></i> Avg. Completion</div>
+          <div class="stat-value">2.4d</div>
+          <div class="stat-change positive">
+            <i class="fas fa-arrow-down"></i> 0.7d faster
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-header">
+          <h2 class="chart-title">Task Completion Trends</h2>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background: var(--primary);"></div>
+              <span>Created</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: var(--secondary);"></div>
+              <span>Completed</span>
+            </div>
+          </div>
+        </div>
+        <canvas id="productivityChart"></canvas>
+      </div>
+
+      <div class="task-distribution">
+        <div class="distribution-card">
+          <div class="distribution-header">
+            <h3 class="distribution-title">By Priority</h3>
+            <span class="distribution-value">127 tasks</span>
+          </div>
+          <div class="progress-item">
+            <div class="progress-labels">
+              <span>High</span>
+              <span>18%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 18%; background: var(--accent);"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-labels">
+              <span>Medium</span>
+              <span>45%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 45%; background: #FFC107;"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-labels">
+              <span>Low</span>
+              <span>37%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 37%; background: #4CAF50;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="distribution-card">
+          <div class="distribution-header">
+            <h3 class="distribution-title">By Category</h3>
+            <span class="distribution-value">127 tasks</span>
+          </div>
+          <div class="progress-item">
+            <div class="progress-labels">
+              <span>Work</span>
+              <span>52%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 52%; background: var(--primary);"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-labels">
+              <span>Personal</span>
+              <span>28%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 28%; background: var(--secondary);"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-labels">
+              <span>Other</span>
+              <span>20%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 20%; background: var(--gray);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/shristi-singh-91454a251/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/shristigithub03"><i class="fab fa-github"></i></a>
+      </div>
+      <p class="copyright">Made by Shristi Singh</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Time period selector
+    function changeTimePeriod(period) {
+      document.querySelectorAll('.time-period-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase() === period) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // Here you would typically fetch new data based on the selected period
+      console.log(`Changed time period to: ${period}`);
+    }
+
+    // Initialize charts
+    document.addEventListener('DOMContentLoaded', function() {
+      // Task completion trend chart
+      const ctx = document.getElementById('productivityChart').getContext('2d');
+      const productivityChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+          datasets: [
+            {
+              label: 'Tasks Created',
+              data: [65, 59, 80, 81, 56, 55, 40],
+              borderColor: 'rgba(127, 90, 240, 1)',
+              backgroundColor: 'rgba(127, 90, 240, 0.1)',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: true
+            },
+            {
+              label: 'Tasks Completed',
+              data: [28, 48, 40, 19, 86, 27, 90],
+              borderColor: 'rgba(44, 182, 125, 1)',
+              backgroundColor: 'rgba(44, 182, 125, 0.1)',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+
+      // Update charts when time period changes
+      window.changeTimePeriod = changeTimePeriod;
+    });
+  </script>
+</body>
+</html>

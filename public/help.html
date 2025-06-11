@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Center | Productivity Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #7F5AF0;
+      --primary-light: #A78BFA;
+      --secondary: #2CB67D;
+      --accent: #FF7E6B;
+      --dark: #16161A;
+      --darker: #0D0D10;
+      --light: #FFFFFE;
+      --gray: #94A1B2;
+      --light-gray: #EFF0F3;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.2);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--light);
+      padding: 1.5rem 2rem;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--light);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .help-container {
+      background: var(--light);
+      border-radius: 1rem;
+      box-shadow: var(--shadow-lg);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 900px;
+      margin: 2rem 0;
+    }
+
+    .help-container h1 {
+      color: var(--primary);
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .help-section {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .help-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .help-section h2 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .help-section h2 i {
+      color: var(--secondary);
+    }
+
+    .help-section p {
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .faq-item {
+      background: var(--light-gray);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .faq-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      color: var(--gray);
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    footer {
+      background: var(--darker);
+      color: var(--light);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-links a {
+      color: var(--light);
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--primary-light);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 0.75rem;
+      }
+
+      .help-container {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header, footer {
+        padding: 1.25rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .help-container {
+        padding: 1.25rem;
+      }
+
+      .help-container h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .help-section {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .help-section:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .help-section:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">
+        <i class="fas fa-check-circle"></i>
+        <span>Productivity Pro</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="setting.html"><i class="fas fa-cog"></i> Settings</a></li>
+          <li><a href="help.html" class="active"><i class="fas fa-question-circle"></i> Help</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="help-container">
+      <h1><i class="fas fa-question-circle"></i> Help Center</h1>
+      
+      <div class="help-section">
+        <h2><i class="fas fa-rocket"></i> Getting Started</h2>
+        <p>Welcome to Productivity Pro! Here's how to make the most of your task management experience:</p>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How do I add a new task?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Simply type your task in the input field at the top of your to-do list and click "Add Task" or press Enter.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How do I mark a task as complete?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Click the checkmark button (<i class="fas fa-check"></i>) next to any task to mark it as completed.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="help-section">
+        <h2><i class="fas fa-lightbulb"></i> Tips & Tricks</h2>
+        <p>Boost your productivity with these expert tips:</p>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How can I organize my tasks effectively?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Try grouping similar tasks together or using the priority feature to focus on what matters most.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I access my tasks from multiple devices?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Currently, tasks are stored in your browser's local storage. For multi-device access, try our export/import feature in Settings.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="help-section">
+        <h2><i class="fas fa-headset"></i> Need More Help?</h2>
+        <p>Contact our support team for additional assistance:</p>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How can I contact support?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Email us at <a href="mailto:support@productivitypro.com">support@productivitypro.com</a> or use the contact form below.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+      <p class="copyright">© 2023 Productivity Pro. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Make FAQ items interactive
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const icon = question.querySelector('i');
+        
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+      });
+    });
+
+    // Initialize - hide all answers
+    document.querySelectorAll('.faq-answer').forEach(answer => {
+      answer.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
